@@ -12,9 +12,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
+  config.vm.network :private_network, ip: "192.168.56.101"
   config.vm.network 'forwarded_port', guest: 80, host: 8080
   config.vm.network 'forwarded_port', guest: 8125, host: 8125, protocol: 'udp'
   config.vm.network 'forwarded_port', guest: 8126, host: 8126
+  config.vm.network 'forwarded_port', guest: 2203, host: 2203
 
   config.vm.provision 'chef_solo' do |chef|
     chef.add_recipe 'apt'
